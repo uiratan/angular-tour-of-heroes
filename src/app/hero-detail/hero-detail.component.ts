@@ -11,9 +11,9 @@ import { Location } from '@angular/common';
 })
 export class HeroDetailComponent implements OnInit {
 
-// Get the route that created it
-// Extract the id from the route
-// Get the hero with that id from the server using the HeroService
+  // Get the route that created it
+  // Extract the id from the route
+  // Get the hero with that id from the server using the HeroService
 
   // @Input() hero?: Hero;
   hero: Hero | undefined;
@@ -34,8 +34,15 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id).subscribe(hero => this.hero = hero);
   }
 
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
+  }
+
   goBack(): void {
     this.location.back();
-  }  
+  }
 
 }
